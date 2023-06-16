@@ -3,14 +3,18 @@ import Crystal from './Crystal';
 import PropTypes from 'prop-types';
 //props are not imported due to it is already sending it through the function 
 
-const CrystalList = ({crystals}) => {
-    const crystalComponents = crystals.map((crystal, index) => {
+const CrystalList = ({crystals, increaseCharge, removeCrystal}) => {
+    const crystalComponents = crystals.map((crystal) => {
         return (
         <li key={crystal.id}> 
-            <Crystal id={crystal.id}
+            <Crystal 
+            id={crystal.id}
             name={crystal.name}
             color={crystal.color}
             powers={crystal.powers}
+            charges = {crystal.charges}
+            increaseCharge = {increaseCharge}
+            removeCrystal = {removeCrystal}
         />
         </li>
     )});
@@ -30,6 +34,7 @@ CrystalList.propTypes= {
         name : PropTypes.string.isRequired,
         color: PropTypes.string.isRequired,
         powers: PropTypes.string.isRequired,
+        charges: PropTypes.number.isRequired,
     })
 ),
 };
