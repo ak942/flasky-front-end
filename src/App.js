@@ -28,7 +28,7 @@ const crystalsData = [
 ]
 //this is jsx it eventuals turns into js
 function App() { //this is an app component that holds other components
-  const [crystals, setCrystals] = useState(crystalsData)
+  const [crystals, setCrystals] = useState([])
   const title = "The Crystal Cove"
 
   React.useEffect(()=> {
@@ -75,12 +75,36 @@ function App() { //this is an app component that holds other components
   const showAllCrystal = () => {
     setCrystals(crystalsData)
   }
+  //coming from W3 schools
+  const getRndInteger = (min, max) => {
+      return Math.floor(Math.random() * (max-min) + min)
+  }
+
+  //callback function can be introduced in parent and handle submission of the form
+  const addCrystal = (newCrystalData) => {
+      axios.post('http://localhost:5000/crystals', newCrystalData)
+      .then(response => {
+        const newCrystals = [...crystals];
+        newCrystals.push({
+          // id: Number(getRndInteger(1000,9999)),
+          id: response.data.id,
+          name: response.data.name,
+          color: response.data.color,
+          powers: response.data.powers,
+          charges: response.data.charges,
+        });
+        setCrystals(newCrystals)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  };
 
   return (
-    <main classname='App'>
+    <main className='App'>
         <h1>{title}</h1>
         <button onClick ={showAllCrystal}> Show All Crystals </button>
-        <CrystalForm/> 
+        <CrystalForm addCrystalCallback = {addCrystal}/> 
         <p> Total Charges: {totalCharges()} </p>
         <CrystalList crystals = {crystals} increaseCharge ={increaseCharge} removeCrystal={removeCrystal} />
     </main>
