@@ -1,6 +1,7 @@
 import React from 'react';
 import Crystal from './Crystal';
 import PropTypes from 'prop-types';
+import './CrystalList.css'
 //props are not imported due to it is already sending it through the function 
 
 const CrystalList = ({crystals, increaseCharge, removeCrystal}) => {

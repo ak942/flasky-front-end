@@ -1,5 +1,6 @@
 import { getValue } from '@testing-library/user-event/dist/utils';
 import React from 'react';
+import './CrystalForm.css'
 
 const CrystalForm = () => {
     //instead of seperate states you can have one
@@ -41,7 +42,7 @@ const CrystalForm = () => {
     // };
 
     return (
-    <form>
+    <form className="new_crystal_form">
         <section>
             <h2>Add a Crystal</h2>
             <div className="new_crystal_fields">
@@ -61,7 +62,7 @@ const CrystalForm = () => {
                     <label htmlFor="Charge"> Charges: </label>
                     <input name="Charges" value = {formFields.powers} onChange={handleChange}/>
                 </div>
-                <button className="new-crystal-button" type="submit" value="Add Crystal">Add Crystal</button>
+                <button className="button new-crystal-button" type="submit" value="Add Crystal">Add Crystal</button>
             </div>
         </section>
     </form>
